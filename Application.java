@@ -1,4 +1,5 @@
 import java.lang.reflect.Array;
+import java.rmi.MarshalException;
 import java.util.Arrays;
 
 /**
@@ -12,24 +13,24 @@ public class Application {
      * @return the difference between the largest and smallest values in the array.
      */
     public int bigDiff(int[] nums) {
-        int last_value = 0;
+        int maxValue = nums[0];
+        int minValue = nums[0];
         int difference = 0;
 
         if (nums == null || nums.length == 0)
             return 0;
-        Arrays.sort(nums);
 
         for (int counter = 0; counter < nums.length; counter++) {
-            last_value = nums[counter];
+            minValue = Math.min(nums[counter], minValue);
+            maxValue = Math.max(nums[counter], maxValue);
         }
-        difference = Math.max(nums[0], last_value) - Math.min(nums[0], last_value);
-
+        difference = maxValue - minValue;
         return difference;
     }
 
     public static void main(String[] args) {
         Application application = new Application();
-        int[] nums = {};
+        int[] nums = {2, 10, 7, 2};
 
         System.out.println(application.bigDiff(nums));
     }
